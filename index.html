@@ -26,7 +26,6 @@
 
       <nav id="nav-links" class="hidden md:flex space-x-6 text-gray-800 font-medium" aria-label="Main navigation">
         <a href="#services" class="hover:text-teal-600 nav-link">Services</a>
-        <a href="#portfolio" class="hover:text-teal-600 nav-link">Portfolio</a>
         <a href="#about" class="hover:text-teal-600 nav-link">About</a>
         <a href="#faqs" class="hover:text-teal-600 nav-link">FAQs</a>
         <a href="#contact" class="hover:text-teal-600 nav-link">Contact</a>
@@ -35,7 +34,6 @@
 
     <div id="mobile-menu" class="md:hidden hidden px-4 pb-4" aria-label="Mobile navigation">
       <a href="#services" class="block py-2 text-gray-800 hover:text-teal-600 nav-link">Services</a>
-      <a href="#portfolio" class="block py-2 text-gray-800 hover:text-teal-600 nav-link">Portfolio</a>
       <a href="#about" class="block py-2 text-gray-800 hover:text-teal-600 nav-link">About</a>
       <a href="#faqs" class="block py-2 text-gray-800 hover:text-teal-600 nav-link">FAQs</a>
       <a href="#contact" class="block py-2 text-gray-800 hover:text-teal-600 nav-link">Contact</a>
@@ -53,56 +51,82 @@
   <section id="services" class="py-16 px-6 max-w-6xl mx-auto">
     <h2 class="text-3xl font-bold mb-8 text-center">Our Services</h2>
     <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-gray-100 p-6 rounded shadow">
+      <div class="bg-gray-100 p-6 rounded shadow cursor-pointer hover:shadow-lg transition-shadow service-card" data-service="planters">
         <h3 class="text-xl font-semibold mb-2">Custom Planters & Vases</h3>
         <p>We design and 3D print custom decor for nurseries, home stores, and gift shops—great for branding and resale.</p>
+        <div class="mt-4 text-teal-600 font-semibold">View Examples →</div>
       </div>
-      <div class="bg-gray-100 p-6 rounded shadow">
+      <div class="bg-gray-100 p-6 rounded shadow cursor-pointer hover:shadow-lg transition-shadow service-card" data-service="fixtures">
         <h3 class="text-xl font-semibold mb-2">Retail Fixtures & Display Models</h3>
         <p>Partner with furniture stores to supply stands, hooks, or shelf art that enhances visual merchandising.</p>
+        <div class="mt-4 text-teal-600 font-semibold">View Examples →</div>
       </div>
-      <div class="bg-gray-100 p-6 rounded shadow">
+      <div class="bg-gray-100 p-6 rounded shadow cursor-pointer hover:shadow-lg transition-shadow service-card" data-service="tools">
         <h3 class="text-xl font-semibold mb-2">Functional Business Tools</h3>
         <p>Sign holders, jigs, packaging aids—we make custom tools to improve local workflows and production.</p>
+        <div class="mt-4 text-teal-600 font-semibold">View Examples →</div>
       </div>
-      <div class="bg-gray-100 p-6 rounded shadow">
+      <div class="bg-gray-100 p-6 rounded shadow cursor-pointer hover:shadow-lg transition-shadow service-card" data-service="prototypes">
         <h3 class="text-xl font-semibold mb-2">Rapid Prototyping</h3>
         <p>Iterate quickly with high-quality prints in PETG or ABS using our BambuLab P1S printer for durable results.</p>
+        <div class="mt-4 text-teal-600 font-semibold">View Examples →</div>
       </div>
     </div>
   </section>
 
-  <!-- Portfolio -->
-  <section id="portfolio" class="py-16 px-6 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold mb-8 text-center">Our Portfolio</h2>
-    
-    <!-- Filter Buttons -->
-    <div class="flex justify-center mb-8">
-      <div class="flex flex-wrap gap-2">
-        <button class="filter-btn active px-4 py-2 rounded-full bg-teal-600 text-white hover:bg-teal-700 transition-colors" data-filter="all">All</button>
-        <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors" data-filter="planters">Planters</button>
-        <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors" data-filter="fixtures">Fixtures</button>
-        <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors" data-filter="tools">Tools</button>
-        <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors" data-filter="prototypes">Prototypes</button>
+  <!-- Service Gallery Modal -->
+  <div id="service-gallery-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+    <div class="relative max-w-6xl max-h-full w-full">
+      <button id="gallery-close" class="absolute top-4 right-4 text-white hover:text-gray-300 z-10">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      
+      <div class="bg-white rounded-lg max-h-full overflow-y-auto">
+        <div class="p-6">
+          <h2 id="gallery-title" class="text-3xl font-bold mb-6 text-center"></h2>
+          <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Images will be loaded dynamically here -->
+          </div>
+          <div id="gallery-loading" class="text-center py-8">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
+            <p class="mt-2 text-gray-600">Loading gallery...</p>
+          </div>
+          <div id="gallery-empty" class="text-center py-8 hidden">
+            <p class="text-gray-600">No examples available yet. Check back soon!</p>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- Portfolio Grid -->
-    <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Images will be loaded dynamically here -->
+  <!-- Individual Image Lightbox Modal -->
+  <div id="lightbox-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+    <div class="relative max-w-4xl max-h-full">
+      <button id="lightbox-close" class="absolute top-4 right-4 text-white hover:text-gray-300 z-10">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <img id="lightbox-image" class="max-w-full max-h-full object-contain" alt="Service example">
+      <div class="absolute bottom-4 left-4 right-4 text-white">
+        <h3 id="lightbox-title" class="text-xl font-semibold mb-2"></h3>
+        <p id="lightbox-description" class="text-gray-300"></p>
+      </div>
+      <!-- Navigation arrows -->
+      <button id="lightbox-prev" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 p-2">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+      <button id="lightbox-next" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 p-2">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
     </div>
-
-    <!-- Loading indicator -->
-    <div id="portfolio-loading" class="text-center py-8">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
-      <p class="mt-2 text-gray-600">Loading portfolio...</p>
-    </div>
-
-    <!-- Empty state -->
-    <div id="portfolio-empty" class="text-center py-8 hidden">
-      <p class="text-gray-600">No portfolio items found. Add images to the /images/portfolio/ folder.</p>
-    </div>
-  </section>
+  </div>
 
   <!-- About -->
   <section id="about" class="py-16 px-6 bg-gray-50">
@@ -167,33 +191,6 @@
   <button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 bg-teal-600 text-white p-3 rounded-full shadow-lg hover:bg-teal-700 transition-opacity opacity-0 pointer-events-none z-50">
     ↑
   </button>
-
-  <!-- Lightbox Modal -->
-  <div id="lightbox-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
-    <div class="relative max-w-4xl max-h-full">
-      <button id="lightbox-close" class="absolute top-4 right-4 text-white hover:text-gray-300 z-10">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-      <img id="lightbox-image" class="max-w-full max-h-full object-contain" alt="Portfolio item">
-      <div class="absolute bottom-4 left-4 right-4 text-white">
-        <h3 id="lightbox-title" class="text-xl font-semibold mb-2"></h3>
-        <p id="lightbox-description" class="text-gray-300"></p>
-      </div>
-      <!-- Navigation arrows -->
-      <button id="lightbox-prev" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 p-2">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
-      </button>
-      <button id="lightbox-next" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 p-2">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
-      </button>
-    </div>
-  </div>
 
   <!-- Footer -->
   <footer class="bg-white py-6 text-center border-t mt-12 text-sm text-gray-500">
@@ -289,33 +286,44 @@
       }
     });
 
-    // Portfolio functionality
-    let portfolioItems = [];
-    let currentLightboxIndex = 0;
-    let filteredItems = [];
+    // Service gallery functionality
+    const serviceData = {
+      planters: {
+        title: "Custom Planters & Vases",
+        items: [
+          { src: 'images/portfolio/planters/planter-1.jpg', title: 'Modern Geometric Planter', description: 'Custom 3D printed planter with geometric design for indoor plants' },
+          { src: 'images/portfolio/planters/planter-2.jpg', title: 'Hexagonal Planter Set', description: 'Modular hexagonal planters for retail display' },
+          { src: 'images/portfolio/planters/planter-3.jpg', title: 'Hanging Garden Planter', description: 'Suspended planter system for vertical gardens' }
+        ]
+      },
+      fixtures: {
+        title: "Retail Fixtures & Display Models",
+        items: [
+          { src: 'images/portfolio/fixtures/fixture-1.jpg', title: 'Retail Display Stand', description: 'Custom display stand for furniture showroom' },
+          { src: 'images/portfolio/fixtures/fixture-2.jpg', title: 'Product Showcase Hooks', description: 'Specialized hooks for retail merchandise display' },
+          { src: 'images/portfolio/fixtures/fixture-3.jpg', title: 'Shelf Dividers', description: 'Modular shelf organization system' }
+        ]
+      },
+      tools: {
+        title: "Functional Business Tools",
+        items: [
+          { src: 'images/portfolio/tools/tool-1.jpg', title: 'Custom Jigs', description: 'Precision manufacturing jigs for local workshop' },
+          { src: 'images/portfolio/tools/tool-2.jpg', title: 'Sign Holders', description: 'Adjustable sign holders for retail environments' },
+          { src: 'images/portfolio/tools/tool-3.jpg', title: 'Packaging Aids', description: 'Custom packaging solutions for small business' }
+        ]
+      },
+      prototypes: {
+        title: "Rapid Prototyping",
+        items: [
+          { src: 'images/portfolio/prototypes/prototype-1.jpg', title: 'Product Prototype', description: 'Rapid prototype for product development' },
+          { src: 'images/portfolio/prototypes/prototype-2.jpg', title: 'Mechanical Component', description: 'Functional prototype for mechanical testing' },
+          { src: 'images/portfolio/prototypes/prototype-3.jpg', title: 'Design Iteration', description: 'Design prototype for client feedback' }
+        ]
+      }
+    };
 
-    // Define portfolio items with metadata
-    const portfolioData = [
-      // Planters
-      { src: 'images/portfolio/planters/planter-1.jpg', category: 'planters', title: 'Modern Geometric Planter', description: 'Custom 3D printed planter with geometric design for indoor plants' },
-      { src: 'images/portfolio/planters/planter-2.jpg', category: 'planters', title: 'Hexagonal Planter Set', description: 'Modular hexagonal planters for retail display' },
-      { src: 'images/portfolio/planters/planter-3.jpg', category: 'planters', title: 'Hanging Garden Planter', description: 'Suspended planter system for vertical gardens' },
-      
-      // Fixtures
-      { src: 'images/portfolio/fixtures/fixture-1.jpg', category: 'fixtures', title: 'Retail Display Stand', description: 'Custom display stand for furniture showroom' },
-      { src: 'images/portfolio/fixtures/fixture-2.jpg', category: 'fixtures', title: 'Product Showcase Hooks', description: 'Specialized hooks for retail merchandise display' },
-      { src: 'images/portfolio/fixtures/fixture-3.jpg', category: 'fixtures', title: 'Shelf Dividers', description: 'Modular shelf organization system' },
-      
-      // Tools
-      { src: 'images/portfolio/tools/tool-1.jpg', category: 'tools', title: 'Custom Jigs', description: 'Precision manufacturing jigs for local workshop' },
-      { src: 'images/portfolio/tools/tool-2.jpg', category: 'tools', title: 'Sign Holders', description: 'Adjustable sign holders for retail environments' },
-      { src: 'images/portfolio/tools/tool-3.jpg', category: 'tools', title: 'Packaging Aids', description: 'Custom packaging solutions for small business' },
-      
-      // Prototypes
-      { src: 'images/portfolio/prototypes/prototype-1.jpg', category: 'prototypes', title: 'Product Prototype', description: 'Rapid prototype for product development' },
-      { src: 'images/portfolio/prototypes/prototype-2.jpg', category: 'prototypes', title: 'Mechanical Component', description: 'Functional prototype for mechanical testing' },
-      { src: 'images/portfolio/prototypes/prototype-3.jpg', category: 'prototypes', title: 'Design Iteration', description: 'Design prototype for client feedback' }
-    ];
+    let currentGalleryItems = [];
+    let currentLightboxIndex = 0;
 
     // Function to check if image exists
     function imageExists(src) {
@@ -327,129 +335,125 @@
       });
     }
 
-    // Function to load portfolio items
-    async function loadPortfolio() {
-      const portfolioGrid = document.getElementById('portfolio-grid');
-      const portfolioLoading = document.getElementById('portfolio-loading');
-      const portfolioEmpty = document.getElementById('portfolio-empty');
+    // Function to open service gallery
+    async function openServiceGallery(serviceType) {
+      const modal = document.getElementById('service-gallery-modal');
+      const title = document.getElementById('gallery-title');
+      const grid = document.getElementById('gallery-grid');
+      const loading = document.getElementById('gallery-loading');
+      const empty = document.getElementById('gallery-empty');
       
-      portfolioItems = [];
+      // Set title
+      title.textContent = serviceData[serviceType].title;
       
-      // Check which images actually exist
-      for (const item of portfolioData) {
+      // Show modal and loading
+      modal.classList.remove('hidden');
+      loading.classList.remove('hidden');
+      empty.classList.add('hidden');
+      grid.innerHTML = '';
+      
+      // Check which images exist
+      const availableItems = [];
+      for (const item of serviceData[serviceType].items) {
         const exists = await imageExists(item.src);
         if (exists) {
-          portfolioItems.push(item);
+          availableItems.push(item);
         }
       }
-
-      // Hide loading indicator
-      portfolioLoading.classList.add('hidden');
-
-      if (portfolioItems.length === 0) {
-        portfolioEmpty.classList.remove('hidden');
+      
+      // Hide loading
+      loading.classList.add('hidden');
+      
+      if (availableItems.length === 0) {
+        empty.classList.remove('hidden');
         return;
       }
-
-      filteredItems = [...portfolioItems];
-      renderPortfolio();
-    }
-
-    // Function to render portfolio items
-    function renderPortfolio() {
-      const portfolioGrid = document.getElementById('portfolio-grid');
-      portfolioGrid.innerHTML = '';
-
-      filteredItems.forEach((item, index) => {
-        const portfolioItem = document.createElement('div');
-        portfolioItem.className = `portfolio-item ${item.category} cursor-pointer group`;
-        portfolioItem.innerHTML = `
+      
+      // Store for lightbox
+      currentGalleryItems = availableItems;
+      
+      // Render gallery
+      availableItems.forEach((item, index) => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'cursor-pointer group';
+        galleryItem.innerHTML = `
           <div class="relative overflow-hidden rounded-lg shadow-lg bg-white">
             <img src="${item.src}" alt="${item.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
             <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity duration-300 flex items-center justify-center">
               <div class="text-white text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <h3 class="text-lg font-semibold mb-2">${item.title}</h3>
-                <p class="text-sm">${item.description}</p>
+                <p class="text-sm px-4">${item.description}</p>
               </div>
             </div>
           </div>
         `;
         
-        portfolioItem.addEventListener('click', () => openLightbox(index));
-        portfolioGrid.appendChild(portfolioItem);
+        galleryItem.addEventListener('click', () => openLightbox(index));
+        grid.appendChild(galleryItem);
       });
-    }
-
-    // Function to filter portfolio items
-    function filterPortfolio(category) {
-      if (category === 'all') {
-        filteredItems = [...portfolioItems];
-      } else {
-        filteredItems = portfolioItems.filter(item => item.category === category);
-      }
-      renderPortfolio();
-    }
-
-    // Function to open lightbox
-    function openLightbox(index) {
-      currentLightboxIndex = index;
-      const item = filteredItems[index];
-      
-      document.getElementById('lightbox-image').src = item.src;
-      document.getElementById('lightbox-title').textContent = item.title;
-      document.getElementById('lightbox-description').textContent = item.description;
-      document.getElementById('lightbox-modal').classList.remove('hidden');
       
       // Disable body scroll
       document.body.style.overflow = 'hidden';
     }
 
+    // Function to close service gallery
+    function closeServiceGallery() {
+      document.getElementById('service-gallery-modal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Function to open lightbox
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      const item = currentGalleryItems[index];
+      
+      document.getElementById('lightbox-image').src = item.src;
+      document.getElementById('lightbox-title').textContent = item.title;
+      document.getElementById('lightbox-description').textContent = item.description;
+      document.getElementById('lightbox-modal').classList.remove('hidden');
+    }
+
     // Function to close lightbox
     function closeLightbox() {
       document.getElementById('lightbox-modal').classList.add('hidden');
-      document.body.style.overflow = 'auto';
     }
 
     // Function to navigate lightbox
     function navigateLightbox(direction) {
       if (direction === 'next') {
-        currentLightboxIndex = (currentLightboxIndex + 1) % filteredItems.length;
+        currentLightboxIndex = (currentLightboxIndex + 1) % currentGalleryItems.length;
       } else {
-        currentLightboxIndex = (currentLightboxIndex - 1 + filteredItems.length) % filteredItems.length;
+        currentLightboxIndex = (currentLightboxIndex - 1 + currentGalleryItems.length) % currentGalleryItems.length;
       }
       
-      const item = filteredItems[currentLightboxIndex];
+      const item = currentGalleryItems[currentLightboxIndex];
       document.getElementById('lightbox-image').src = item.src;
       document.getElementById('lightbox-title').textContent = item.title;
       document.getElementById('lightbox-description').textContent = item.description;
     }
 
-    // Event listeners for portfolio
+    // Event listeners
     document.addEventListener('DOMContentLoaded', () => {
-      loadPortfolio();
-      
-      // Filter buttons
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          // Update active state
-          document.querySelectorAll('.filter-btn').forEach(b => {
-            b.classList.remove('active', 'bg-teal-600', 'text-white');
-            b.classList.add('bg-gray-200', 'text-gray-700');
-          });
-          btn.classList.add('active', 'bg-teal-600', 'text-white');
-          btn.classList.remove('bg-gray-200', 'text-gray-700');
-          
-          // Filter portfolio
-          filterPortfolio(btn.dataset.filter);
+      // Service card clicks
+      document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('click', () => {
+          openServiceGallery(card.dataset.service);
         });
       });
 
-      // Lightbox controls
+      // Gallery controls
+      document.getElementById('gallery-close').addEventListener('click', closeServiceGallery);
       document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
       document.getElementById('lightbox-prev').addEventListener('click', () => navigateLightbox('prev'));
       document.getElementById('lightbox-next').addEventListener('click', () => navigateLightbox('next'));
 
-      // Close lightbox on background click
+      // Close modals on background click
+      document.getElementById('service-gallery-modal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+          closeServiceGallery();
+        }
+      });
+
       document.getElementById('lightbox-modal').addEventListener('click', (e) => {
         if (e.target === e.currentTarget) {
           closeLightbox();
@@ -458,18 +462,22 @@
 
       // Keyboard navigation
       document.addEventListener('keydown', (e) => {
-        if (document.getElementById('lightbox-modal').classList.contains('hidden')) return;
-        
-        switch(e.key) {
-          case 'Escape':
-            closeLightbox();
-            break;
-          case 'ArrowLeft':
-            navigateLightbox('prev');
-            break;
-          case 'ArrowRight':
-            navigateLightbox('next');
-            break;
+        if (!document.getElementById('lightbox-modal').classList.contains('hidden')) {
+          switch(e.key) {
+            case 'Escape':
+              closeLightbox();
+              break;
+            case 'ArrowLeft':
+              navigateLightbox('prev');
+              break;
+            case 'ArrowRight':
+              navigateLightbox('next');
+              break;
+          }
+        } else if (!document.getElementById('service-gallery-modal').classList.contains('hidden')) {
+          if (e.key === 'Escape') {
+            closeServiceGallery();
+          }
         }
       });
     });
